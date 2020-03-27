@@ -30,7 +30,7 @@ def info(update, context):
 
     # Save the image
     res = requests.get('http://www.murciasalud.es/' + href, allow_redirects=True)
-    filename = '../img/' + date + '.png'
+    filename = '..\\img\\' + date + '.png'
     open(filename, 'wb').write(res.content)
 
     # Send image
