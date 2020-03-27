@@ -1,8 +1,12 @@
+import os
 import datetime
 import logging
 from telegram.ext import CommandHandler, Updater
 import bs4
 import requests
+
+TOKEN = '1083509739:AAH5Txt9Zq_zJ6ooLQFF5nmIGO7ryOunfsA'
+PORT = int(os.environ.get('PORT', '8443'))
 
 
 def start(update, context):
@@ -36,7 +40,7 @@ def info(update, context):
 
 
 # Updater
-updater = Updater(token='1083509739:AAH5Txt9Zq_zJ6ooLQFF5nmIGO7ryOunfsA', use_context=True)
+updater = Updater(token=TOKEN, use_context=True)
 dispatcher = updater.dispatcher
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -46,6 +50,9 @@ info_handler = CommandHandler('info', info)
 dispatcher.add_handler(start_handler)
 dispatcher.add_handler(info_handler)
 
-
-updater.start_polling()
+# Start
+updater.start_webhook(listen="0.0.0.0",
+                      port=PORT,
+                      url_path=TOKEN)
+updater.bot.set_webhook("https://coronavirusmurciabot.herokuapp.com/" + TOKEN)
 updater.idle()
