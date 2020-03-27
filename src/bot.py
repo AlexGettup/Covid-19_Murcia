@@ -1,12 +1,8 @@
-import telegram
 import datetime
 import logging
 from telegram.ext import CommandHandler, Updater
 import bs4
 import requests
-from PIL import Image
-import os.path
-import time
 
 
 def start(update, context):
@@ -52,3 +48,4 @@ dispatcher.add_handler(info_handler)
 
 
 updater.start_polling()
+updater.idle()
