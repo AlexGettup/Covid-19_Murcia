@@ -1,4 +1,4 @@
 telegram
 bs4
 requests
-PIL
+Pillow
