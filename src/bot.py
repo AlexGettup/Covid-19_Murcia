@@ -19,22 +19,26 @@ def info(update, context):
     # Get the day
     dt = datetime.datetime.today()
     date = dt.strftime("%d_%m_%y")
+    filename = '../img/' + date + '.png'
 
-    # Retrieve the image url
-    res = requests.get('http://www.murciasalud.es/pagina.php?id=458440')
-    soup = bs4.BeautifulSoup(res.text, 'html.parser')
-    div = soup.find('div', id='coronavirus')
-    soup = bs4.BeautifulSoup(str(div), "html.parser")
-    ases = soup.find_all('a')
-    href = ases[len(ases) - 1]['href']
+    if not os.path.isfile(filename):
 
-    # Save the image
-    res = requests.get('http://www.murciasalud.es/' + href, allow_redirects=True)
-    filename = '..\\img\\' + date + '.png'
-    open(filename, 'wb').write(res.content)
+        # Retrieve the image url
+        res = requests.get('http://www.murciasalud.es/pagina.php?id=458440')
+        soup = bs4.BeautifulSoup(res.text, 'html.parser')
+        div = soup.find('div', id='coronavirus')
+        soup = bs4.BeautifulSoup(str(div), "html.parser")
+        ases = soup.find_all('a')
+        href = ases[len(ases) - 1]['href']
+
+        # Save the image
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Descargando información, un momento...")
+        res = requests.get('http://www.murciasalud.es/' + href, allow_redirects=True)
+        open(filename, 'wb').write(res.content)
 
     # Send image
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(filename, 'rb'))
+    context.bot.send_message(chat_id=update.effective_chat.id, text=date)
 
 
 # Updater
