@@ -2,3 +2,4 @@ telegram
 bs4
 requests
 Pillow
+python-telegram-bot
