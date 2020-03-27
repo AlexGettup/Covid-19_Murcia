@@ -29,8 +29,8 @@ def info(update, context):
     soup = bs4.BeautifulSoup(str(div), "html.parser")
     ases = soup.find_all('a')
     href = ases[len(ases) - 1]['href']
-    href += '?a=' + datetime.datetime.now().isoformat()
-    
+    href += '&?a=' + datetime.datetime.now().isoformat()
+
     # Save the image♂
     # res = requests.get('http://www.murciasalud.es/' + href, allow_redirects=True)
     # print(res.text)
