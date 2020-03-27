@@ -30,9 +30,10 @@ def info(update, context):
     ases = soup.find_all('a')
     href = ases[len(ases) - 1]['href']
     href += '?a=' + datetime.datetime.now().isoformat()
+    
     # Save the image♂
-    res = requests.get('http://www.murciasalud.es/' + href, allow_redirects=True)
-    print(res.text)
+    # res = requests.get('http://www.murciasalud.es/' + href, allow_redirects=True)
+    # print(res.text)
     # open(filename, 'wb').write(res.content)
 
     # Send image
