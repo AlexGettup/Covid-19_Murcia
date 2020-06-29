@@ -5,7 +5,7 @@ from telegram.ext import CommandHandler, Updater
 import bs4
 import requests
 
-TOKEN = os.environ('TOKEN')
+TOKEN = os.environ['TOKEN']
 PORT = int(os.environ.get('PORT', '8443'))
 
 
